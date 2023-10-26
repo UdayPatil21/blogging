@@ -2,6 +2,7 @@ package db
 
 import (
 	"log"
+	"os"
 
 	model "github.com/UdayPatil21/blogging/models"
 	_ "github.com/go-sql-driver/mysql"
@@ -22,8 +23,9 @@ const (
 )
 
 func MySqlConnection() {
-	dburl := "root:Digi@2023@/Blogging?parseTime=true"
-	DBInstance, DbError = gorm.Open("mysql", dburl)
+	// dburl := "root:Digi@2023@/Blogging?parseTime=true"
+
+	DBInstance, DbError = gorm.Open("mysql", os.Getenv("DbURL"))
 	if DbError != nil {
 		log.Println("Cannot Connect to Database", DbError)
 	}
