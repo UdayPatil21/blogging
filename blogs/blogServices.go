@@ -2,6 +2,7 @@ package blogs
 
 import (
 	"log"
+	"time"
 
 	"github.com/UdayPatil21/blogging/db"
 	model "github.com/UdayPatil21/blogging/models"
@@ -21,6 +22,7 @@ type Blogs struct {
 func (b *Blogs) CreateBlogService(blogPost model.BlogPost) error {
 	//Create uuid
 	blogPost.ID = uuid.New().String()
+	blogPost.CreatedDate = time.Now().Format("01-02-2006")
 	err := db.DBInstance.Table(db.BlogDB).Create(&blogPost).Error
 	if err != nil {
 		log.Println("Error inserting the data", err)
